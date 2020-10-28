@@ -1,0 +1,114 @@
+\section{Vypracování}
+
+Zadání dává možnost zvolit si frekvence pro sinusové signály.
+Mnou zvolené hodnoty jsou \( F_1 = 700 \: Hz \) a~\( F_2 = 2000 \: Hz \).
+Jako rozptyl bílého šumu byla zvolena hodnota 1, tedy \( \mathcal{N}(\mu, \sigma^{2}) = \mathcal{N}(0, 1) \).
+
+Vzorkovací frekvence signálu nesmí porušit Nyquist–Shannonův teorém, je tedy nutné vzorkovat signál nejméně dvojnásobnou frekvencí než je maximální frekvence nacházející se v signálu.
+
+\begin{align*}
+    f_s &= 2B \\
+    f_s &= 2 \cdot \max{(F_1, F_2)}
+\end{align*}
+
+Bod úniku média jsem zvolil ve dvou třetinách vzdálenosti mezi snímači, tedy v 1000 metrech.
+ 
+\section{Výsledky}
+
+Tabulka~\ref{table:table1} obsahuje pro přehlednost zaokrouhlené hodnoty.
+Lze z ní vyčíst, že z hlediska přesnosti jsou metody srovnatelné, výpočet v časové doméně je však až několikanásobně delší.
+
+\begin{table}[htb]
+    \centering
+
+    \begin{tabular}{ccccc}
+        \toprule
+
+        \multirow{2}{*}{Šum (dB)}   & \multicolumn{2}{c}{Únik média (m)}    & \multicolumn{2}{c}{Doba výpočtu (s)}  \\ \cmidrule(lr){2-3} \cmidrule(lr){4-5}
+                                    & Časová doména	& Frekvenční doména     & Časová doména	& Frekvenční doména	    \\ \midrule
+
+        80                          & 1000          & 1000                  & 0.0340        & 0.0091                \\
+        60                          & 1000          & 1000                  & 0.0368        & 0.0036                \\
+        40                          & 1000          & 1000                  & 0.0201        & 0.0007                \\
+        20                          & 1000          & 1000                  & 0.0160        & 0.0006                \\
+        10                          & 1000          & 1000                  & 0.0144        & 0.0025                \\
+        0                           & 1000          & 1000                  & 0.0125        & 0.0003                \\
+        -10                         & 869           & 1000                  & 0.0129        & 0.0003                \\
+        -20                         & 963           & 1196                  & 0.0129        & 0.0003                \\
+        -40                         & 969           & 1448                  & 0.0148        & 0.0003                \\
+        -60                         & 478           & 669                   & 0.0123        & 0.0005                \\
+        -80                         & 746           & 514                   & 0.0124        & 0.0004                \\
+
+        \bottomrule
+    \end{tabular}
+
+    \caption{Odhady úniku média a doby výpočtů ve frekvenční a časové doméně pro různé úrovně zašumění signálu.}
+    \label{table:table1}
+\end{table}
+\FloatBarrier
+
+Tabulky~\ref{table:table2} a~\ref{table:table3} zobrazují, jak obstojné jsou metody z hlediska různých pozic úniků média.
+Potvrzují se závěry z předešlé tabulky o srovnatelnosti obou metod.
+Výsledky jsou vhledem k náhodné povaze příkladu pouze orientační a pro zcela objektivní závěry by bylo nutné provést simulace mnohokrát za sebou a vypočítat trend.
+
+Zajímavé jsou zcela zcestné hodnoty (\textit{outliers}), odporující fyzikální reprezentaci (jestliže neberu v~úvahu, že simulace počítá s nekonečně dlouhým potrubím, jinak bychom museli započítat i odrazy signálů, etc.) příkladu a stanovující hodnotu úniku mimo souřadnicový systém řešené úlohy.
+
+
+\begin{table}[htb]
+    \centering
+
+    \begin{tabular}{lrrrrrrrrrrr}
+        \toprule
+
+        \multirow{2}{*}{Únik (m)}   & \multicolumn{11}{c}{Šum (dB)}                                                         \\ \cmidrule[\lightrulewidth](lr){2-12}
+                                    & 80    & 60    & 40    & 20    & 10     & 0    & -10   & -20    & -40  & -60   & -80   \\ \midrule
+
+         200                        &  200  &  200  &  200  &  200  &  200  &  200  &   79  & 1154   & 1229 &  304  &    9  \\
+         400                        &  400	&  400  &  400  &  400  &  400  &  400  &  216  & 1193   &  574 &  897  & 1319  \\
+         600                        &  600	&  600  &  600  &  600  &  600  &  600  &  421  & 1146   &  964 & 1096  & 1261  \\
+         800                        &  800	&  800  &  800  &  800  &  800  &  800  & 1109  &  896   &  767 &  827  &  989  \\
+        1000                        & 1000	& 1000  & 1000  & 1000  & 1000  & 1000  &  890  &  803   &  254 &  803  & 1141  \\
+        1200                        & 1200	& 1200  & 1200  & 1200  & 1200  & 1200  & 1353  &  475   &   66 & 1229  &  314  \\
+        1400                        & 1400	& 1400  & 1400  & 1400  & 1400  & 1400  & 1373  &  123   & 1129 & 1021  &  683  \\
+
+        \bottomrule
+    \end{tabular}
+
+    \caption{Odhady polohy úniku média (v metrech) pro různé pozice úniku a různě zašuměný signál v~časové doméně.}
+    \label{table:table2}
+\end{table}
+\FloatBarrier
+
+\begin{table}[htb]
+    \centering
+
+    \begin{tabular}{lrrrrrrrrrrr}
+        \toprule
+        
+        \multirow{2}{*}{Únik (m)}   & \multicolumn{11}{c}{Šum (dB)}                                                         \\ \cmidrule[\lightrulewidth](lr){2-12}
+                                    & 80    & 60    & 40    & 20    & 10     & 0    & -10   & -20   & -40   & -60   & -80   \\ \midrule
+
+         200                        &  200  &  200  &  200  &  200  &  200  &  200  &  200  & 1386  &  -58  & 1276  &  885  \\
+         400                        &  400	&  400  &  400  &  400  &  400  &  400  &  400  &  271  & 1572  & 1245  &  575  \\
+         600                        &  600	&  600  &  600  &  600  &  600  &  600  &  600  & 1292  & 1516  & 1569  & 1077  \\
+         800                        &  800	&  800  &  800  &  800  &  800  &  800  &  800  & 1549  &  318  &  753  &  395  \\
+        1000                        & 1000	& 1000  & 1000  & 1000  & 1000  & 1000  & 1000  & 1064  &  327  &  269  & 1076  \\
+        1200                        & 1200	& 1200  & 1200  & 1200  & 1200  & 1200  &  956  &  222  &  500  & 1158  & 1155  \\
+        1400                        & 1400	& 1400  & 1400  & 1400  & 1400  & 1400  & 1400  & 1068  &  799  &  789  &  -34  \\
+
+        \bottomrule
+    \end{tabular}
+
+    \caption{Odhady polohy úniku média (v metrech) pro různé pozice úniku a různě zašuměný signál ve frekvenční doméně.}
+    \label{table:table3}
+\end{table}
+\FloatBarrier
+
+\section{Závěr}
+
+V rámci semestrální práce byly implementovány 2 metody pro detekci úniku média z potrubí.
+První systém využíval výpočet korelace v časovém spektru, druhý ve spektru frekvenčním.
+Kvalitativně jsou si metody podobné, vykazujíce zásadní chybovost až při odstupu signál\/šum \( 0 \: dB \) v~časové oblasti a~\( -10 \: dB \) v~oblasti frekvenční.
+Zásadní rozdíl je však v rychlosti obou metod.
+Z naměřených dat vyplývá, že rychlost výpočtu ve frekvenční oblasti je několikanásobná oproti výpočtu v časovém spektru.
+Tento výsledek však není nikterak překvapivý, vezmeme-li v úvahu simplifikaci matematických operací, které dosáhneme po převedení do frekvenční oblasti.
