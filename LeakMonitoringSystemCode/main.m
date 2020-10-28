@@ -140,9 +140,6 @@ for leak = leaks
         %%
         % Compute Correlation in Time Domain
         R = GetCorrelation(SS_1, SS_2, (StopTime / dt), frame);
-
-        disp(leak)
-        disp(noise)
         
         % Compute Leak Position
         leakTD = GetLeakPosition(R, s_1, s_2, dt, velocity);
