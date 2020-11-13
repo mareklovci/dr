@@ -35,9 +35,6 @@ saveas(gcf, 'fig2', 'epsc')
 % number of points in each cluster
 num_points = length(Data); 
 
-% reshuffle the data labels
-Data_r = [Data(:,1:2) randi(2,num_points,1)];
-
 % make some initial guess
 Param = InitialGuess(Data);
 
@@ -55,22 +52,22 @@ formatSpec = 'iteration: %d, error: %2.4f, mu1: [%2.4f %2.4f], mu2: [%2.4f %2.4f
 while error > epsilon
     iter = iter + 1;
 
-    %% E-step
+    %% Expectation Step
     Data_ = expectation(Data, Param);
     
-    %% M-step
+    %% Maximization Step
     Param_ = maximization(Data_, Param);
     
-    %% calculate the error from the previous set of params
+    %% Calculate the Error From the Previous Params
     error = norm(Param.mu1 - Param_.mu1) + norm(Param.mu2 - Param_.mu2);
     
     % Print table
     fprintf(formatSpec, iter, error, Param_.mu1, Param_.mu2);    
 
-    errors(iter) = error;
+    % Just Assign Variables
+    errors(iter) = error; Data = Data_; Param = Param_;
     
-    Data = Data_; Param = Param_;
-    
+    % Let's Make an Order
     clear Data_ Param_
 end
 
