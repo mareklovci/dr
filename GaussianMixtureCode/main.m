@@ -1,4 +1,4 @@
-%% KMA/MME Insert title
+%% KKY/DR Gaussian Mixture Parameters
 
 % Clear Sequence
 clear all, close all %#ok<CLALL>
@@ -17,7 +17,7 @@ figure; plot(x, y, '.');
 title('Input Data'); xlabel('x'); ylabel('y');
 
 % Save figure
-saveas(gcf, 'fig1', 'epsc')
+% saveas(gcf, 'fig1', 'epsc')
 
 %% MATLAB EM Results
 
@@ -35,7 +35,7 @@ title('{\bf Scatter Plot and Fitted Gaussian Mixture Contours}')
 legend(h,'Model0','Model1'); hold off;
 
 % Save figure
-saveas(gcf, 'fig2', 'epsc')
+% saveas(gcf, 'fig2', 'epsc')
 
 %% Custom EM
 
@@ -86,7 +86,7 @@ title('Custom EM Results'); xlabel('x'); ylabel('y');
 legend(h, 'Model0', 'Model1');
 
 % Save figure
-saveas(gcf, 'fig3', 'epsc')
+% saveas(gcf, 'fig3', 'epsc')
 
 %% Plot Error Curve
 
@@ -94,6 +94,6 @@ figure; plot(1:iter, errors, '.-'); title('Error to Iteration No');
 xlabel('Iteration No'); ylabel('||\lambda_i - \lambda_{i - 1}||_2');
 
 % Save figure
-saveas(gcf, 'fig4', 'epsc')
+% saveas(gcf, 'fig4', 'epsc')
 
 % End of Script
