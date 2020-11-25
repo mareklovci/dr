@@ -55,7 +55,19 @@ Někde \( R \) být musí a jelikož nemůže být na 0, protože to je hodnota 
 \end{equation}
 
 Pravděpodobnost, že se výherní dveře nacházejí za dveřmi \( D = 1 \) je tedy \( \frac{2}{3} \).
-Obdobně můžeme postupovat pro problém čtyř dveří.
+Obdobně můžeme postupovat pro problém čtyř dveří, se znalostí výsledků se však můžeme na situaci podívat i následovně.
+Pravděpodobnost výběru správných dveří na první pokus je \( \frac{1}{4} \).
+
+Označme \( P(V | Z) \) pravděpodobnost výhry v případě, že hráč změní původní vybrané dveře.
+Budiž \( P(VN4) \) pravděpodobností výběru nevýherních dveří ze 4 dveří.
+Po tom, co moderátor jedny dveře otevře a nabídne hráči změnu, hráč vybírá ze 2 dveří.
+Pravděpodobnost výberu výherních dveří z těchto dvou zbývajících označme jako \( P(VV2) \).
+
+\begin{align}
+    P(V | Z)    &= P(VN4) \cdot P(VV2) \\
+                &= \frac{3}{4} \cdot \frac{1}{2} \\
+                &= \frac{3}{8}
+\end{align}
 
 \section{Experimentální výsledky}
 
@@ -84,14 +96,12 @@ Tabulka~\ref{table:table2} znázorňuje experimentální výsledky pro problém 
 \begin{table}[htb]
     \centering
 
-    \begin{tabular}{cccc}
+    \begin{tabular}{ccc}
         \toprule
 
-        Změna hráčem 1  & Změna hráčem 2    & Moderátor volí náhodně    & Moderátor volí nevýherní dveře    \\ \midrule
-        Ano             & Ano               & 0.1403                    & 0.6248                            \\
-        Ne              & Ano               & 0.1380                    & 0.7509                            \\
-        Ano             & Ne                & 0.2530                    & 0.3734                            \\
-        Ne              & Ne                & 0.2485                    & 0.2513                            \\
+        Změna hráčem    & Moderátor volí náhodně    & Moderátor volí nevýherní dveře    \\ \midrule
+        Ano             & 0.2493                    & 0.3740                            \\
+        Ne              & 0.2492                    & 0.2515                            \\
 
         \bottomrule
     \end{tabular}
@@ -104,5 +114,5 @@ Tabulka~\ref{table:table2} znázorňuje experimentální výsledky pro problém 
 \section{Závěr}
 
 Experimentální výsledky potvrzují teorii.
-V případě, že moderátor volí náhodně, tak je prakticky jedno co hráč udělá, pravděpodobnost výhry je rovna náhodnému výběru.
-V případě, že moderátor otevírá pouze nevýherní dveře, je pravděpodobnost dle teorie rovna \( 66 \: \% \), v případě čtyř dveří ekvivalentně \( 75 \: \% \).
+Jestliže moderátor volí náhodně, tak je prakticky jedno co hráč udělá, pravděpodobnost výhry je rovna náhodnému výběru.
+V opačném případě je pro pro hráče, ve variantě výběru tří i čtyř dveří, vhodné zvolit strategii změny původní volby.

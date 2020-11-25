@@ -1,4 +1,6 @@
-%% KKY/DR 4 Doors
+%% KKY/DR 3 Doors
+% Moderator Strategy = MS (Random, Goat)
+% Player Strategy = PS (Change, Hold)
 
 % Clear Sequence
 clear all, close all %#ok<CLALL>
@@ -7,6 +9,10 @@ clear all, close all %#ok<CLALL>
 pause(0.01)
 
 %% Initialize parameters
+
+% Output Table format text
+formatSpec1 = 'Player Stategy Change Prob: %1.4f \n';
+formatSpec2 = 'Player Stategy Hold Prob: %1.4f \n';
 
 % Number of doors
 doorCount = 3;
@@ -17,8 +23,10 @@ num_samples = 100000;
 % Create n vector of random choises for given number of doors
 choose = @(n, doors) floor(rand(n, 1) * doors) + 1;
 
-%% Simulation
-% Moderator does not know where the car is
+%% MS: Random
+
+% Print MS
+disp('Moderator Strategy: Random')
 
 % Choose door for each game
 playerChoices = choose(num_samples, doorCount);
@@ -45,11 +53,13 @@ playerChoicesNext1 = playerChoiceNext(playerChoices, moderatorChoices, playerLos
 playerWon1 = carDoor == playerChoicesNext1;
 
 % Results
-disp(sum(playerWon0 == 1) / num_samples);
-disp(sum(playerWon1 == 1) / num_samples);
+fprintf(formatSpec2, sum(playerWon0 == 1) / num_samples);
+fprintf(formatSpec1, sum(playerWon1 == 1) / num_samples);
 
-%% Simulation
-% Moderator does know where the car is
+%% MS: Goat
+
+% Print MS
+disp('Moderator Strategy: Goat')
 
 % Choose door for each game
 playerChoices = choose(num_samples, doorCount);
@@ -76,7 +86,7 @@ playerChoicesNext1 = playerChoiceNext(playerChoices, moderatorChoices, playerLos
 playerWon1 = carDoor == playerChoicesNext1;
 
 % Results
-disp(sum(playerWon0 == 1) / num_samples);
-disp(sum(playerWon1 == 1) / num_samples);
+fprintf(formatSpec2, sum(playerWon0 == 1) / num_samples);
+fprintf(formatSpec1, sum(playerWon1 == 1) / num_samples);
 
 % End of Script
