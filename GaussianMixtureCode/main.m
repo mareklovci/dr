@@ -47,14 +47,14 @@ Param = InitialGuess(Data);
 
 %% run EM to find the parameters 
 
-% Preallocate error vector
-errors = zeros(5, 1);
+% Preallocate result vectors
+errors = zeros(5, 1); lambdas = zeros(5, 2);
 
 % Something large to begin with, counter & precision
-error = inf; iter = 0; epsilon = 0.001;
+error = 10000; iter = 0; epsilon = 0.001;
 
 % Output Table format text
-formatSpec = 'iteration: %d, error: %2.4f, mu1: [%2.4f %2.4f], mu2: [%2.4f %2.4f] \n';
+formatSpec = 'iteration: %d, error: %2.4f, mu1: [%2.4f %2.4f], mu2: [%2.4f %2.4f], lambda1: %2.4f, lambda2: %2.4f \n';
 
 while error > epsilon
     iter = iter + 1;
@@ -66,10 +66,13 @@ while error > epsilon
     Param_ = maximization(Data_, Param);
     
     %% Calculate the Error From the Previous Params
-    error = norm(Param.mu1 - Param_.mu1) + norm(Param.mu2 - Param_.mu2);
+    % error = norm(Param.mu1 - Param_.mu1) + norm(Param.mu2 - Param_.mu2);
+    error = norm(Param.mu1 - Param_.mu1) * Param_.lambda(1) + ...
+            norm(Param.mu2 - Param_.mu2) * Param_.lambda(2);
     
     % Print table
-    fprintf(formatSpec, iter, error, Param_.mu1, Param_.mu2);    
+    fprintf(formatSpec, iter, error, Param_.mu1, Param_.mu2,...
+        Param_.lambda(1), Param_.lambda(2));    
 
     % Just Assign Variables
     errors(iter) = error; Data = Data_; Param = Param_;
